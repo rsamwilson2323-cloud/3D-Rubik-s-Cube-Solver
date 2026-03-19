@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" type="image/png" href="rubix.png">
+    <title>Rubik's Debugger Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="interface">
+        <div class="panel" id="dashboard-panel">
+            <div class="panel-header">
+                <div class="drag-handle" title="Drag to move">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <circle cx="4" cy="4" r="1.5"/>
+                        <circle cx="12" cy="4" r="1.5"/>
+                        <circle cx="4" cy="8" r="1.5"/>
+                        <circle cx="12" cy="8" r="1.5"/>
+                        <circle cx="4" cy="12" r="1.5"/>
+                        <circle cx="12" cy="12" r="1.5"/>
+                    </svg>
+                </div>
+                <h1>CUBE<span class="highlight">DEBUG</span></h1>
+                <div class="system-status">
+                    <span id="ai-state">IDLE</span>
+                    <div class="status-dot"></div>
+                </div>
+            </div>
+            <div class="resize-handle" title="Drag to resize"></div>
+
+            <div class="section">
+                <label>Architecture</label>
+                <select id="puzzle-type">
+                    <option value="2">2x2 Pocket</option>
+                    <option value="3" selected>3x3 Standard</option>
+                    <option value="4">4x4 Matrix</option>
+                    <option value="5">5x5 Professor</option>
+                    <option value="mirror">Mirror Cube</option>
+                </select>
+            </div>
+
+            <div class="section">
+                <label>Operations</label>
+                <div class="btn-group">
+                    <button id="btn-scramble" class="btn warning">Scramble</button>
+                    <button id="btn-solve" class="btn primary">Auto-Solve</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <label>Solve Strategy</label>
+                <select id="solve-mode">
+                    <option value="reverse" selected>Reverse History (Fast, Always Works)</option>
+                    <option value="ai-kociemba">AI: Kociemba (3×3, Experimental - Needs Implementation)</option>
+                </select>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-label">Moves</span>
+                    <span class="stat-value" id="stack-count">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Speed</span>
+                    <span class="stat-value" id="speed-val">10</span>
+                </div>
+                <div class="stat-box stat-box-accent">
+                    <span class="stat-label">Solve Time</span>
+                    <span class="stat-value" id="solve-time">0.00s</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <label>Animation Speed (1-20)</label>
+                <input type="range" id="speed-slider" min="1" max="20" value="10">
+            </div>
+
+            <div class="terminal">
+                <div class="terminal-bar">DEBUG_CONSOLE</div>
+                <div id="console-log" class="console">
+                    <div>> System Ready.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="viewport"></div>
+
+    <!-- Kociemba Algorithm Library - To be added by contributors -->
+    <!-- See README.md "Implementing Kociemba's Algorithm" section for instructions -->
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
